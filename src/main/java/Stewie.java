@@ -2,6 +2,10 @@ import java.util.Scanner;
 
 public class Stewie {
 
+    private static final int MAX_TASKS = 100;
+    private String[] tasks = new String[MAX_TASKS];
+    private int taskCount = 0;
+
     public static void main(String[] args) {
         new Stewie().run();
     }
@@ -13,7 +17,7 @@ public class Stewie {
         String input = scanner.nextLine();
 
         while (!input.equals("bye")) {
-            echo(input);
+            processInput(input);
             input = scanner.nextLine();
         }
 
@@ -29,9 +33,37 @@ public class Stewie {
     }
 
 
-    private void echo(String input) {
+    private void processInput(String input) {
+        if (input.equals("list")) {
+            printTasks();
+        } else {
+            addTask(input);
+        }
+    }
+
+
+    private void addTask(String input) {
+        if (taskCount < MAX_TASKS) {
+            tasks[taskCount] = input;
+            taskCount++;
+            System.out.println("____________________________________________________________");
+            System.out.println("added: " + input);
+            System.out.println("____________________________________________________________");
+        } else {
+            System.out.println("____________________________________________________________");
+            System.out.println("What the deuce? ");
+            System.out.println("____________________________________________________________");
+        }
+    }
+
+    private void printTasks() {
         System.out.println("____________________________________________________________");
-        System.out.println(input);
+        for (int i = 0; i < taskCount; i++) {
+            System.out.println((i + 1) + ". " + tasks[i]);
+        }
+        if (taskCount == 0) {
+            System.out.println("You got nothing to do hmmm? Hmmmm? Are you sure? 100% sure?");
+        }
         System.out.println("____________________________________________________________");
     }
 
