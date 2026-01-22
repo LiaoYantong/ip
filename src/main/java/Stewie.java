@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Stewie {
 
     private static final int MAX_TASKS = 100;
-    private String[] tasks = new String[MAX_TASKS];
+    private Task[] tasks = new Task[MAX_TASKS];
     private int taskCount = 0;
 
     public static void main(String[] args) {
@@ -34,17 +34,28 @@ public class Stewie {
 
 
     private void processInput(String input) {
-        if (input.equals("list")) {
-            printTasks();
-        } else {
-            addTask(input);
+        String[] parts = input.split(" ", 2);
+        String command = parts[0];
+
+        switch (command) {
+            case "list":
+                printTasks();
+                break;
+            case "mark":
+                if (parts.length > 1) markTask(parts[1]);
+                break;
+            case "unmark":
+                if (parts.length > 1) unmarkTask(parts[1]);
+                break;
+            default:
+                addTask(input);
         }
     }
 
 
     private void addTask(String input) {
         if (taskCount < MAX_TASKS) {
-            tasks[taskCount] = input;
+            tasks[taskCount] = new Task(input);
             taskCount++;
             System.out.println("____________________________________________________________");
             System.out.println("added: " + input);
@@ -65,6 +76,36 @@ public class Stewie {
             System.out.println("You got nothing to do hmmm? Hmmmm? Are you sure? 100% sure?");
         }
         System.out.println("____________________________________________________________");
+    }
+
+    public void markTask(String arg) {
+        try {
+            int index = Integer.parseInt(arg) - 1;
+            if (index >= 0 && index < taskCount) {
+                tasks[index].markDone();
+                System.out.println("____________________________________________________________");
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("  " + tasks[index]);
+                System.out.println("____________________________________________________________");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid index. Do try again.");
+        }
+    }
+
+    public void unmarkTask(String arg) {
+        try {
+            int index = Integer.parseInt(arg) - 1;
+            if (index >= 0 && index < taskCount) {
+                tasks[index].markUndone();
+                System.out.println("____________________________________________________________");
+                System.out.println("OK, I've marked this task as not done yet:");
+                System.out.println("  " + tasks[index]);
+                System.out.println("____________________________________________________________");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid index. Do try again.");
+        }
     }
 
 
