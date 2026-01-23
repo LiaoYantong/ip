@@ -1,9 +1,10 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Stewie {
 
     private static final int MAX_TASKS = 100;
-    private Task[] tasks = new Task[MAX_TASKS];
+    private ArrayList<Task> tasks = new ArrayList<>();
     private int taskCount = 0;
 
     public static void main(String[] args) {
@@ -56,6 +57,9 @@ public class Stewie {
             case "event":
                 if (parts.length > 1) addEvent(parts[1]);
                 break;
+            case "delete":
+                if (parts.length > 1) deleteTask(parts[1]);
+                break;
             default:
                 System.out.println("What the deuce?");
         }
@@ -64,7 +68,7 @@ public class Stewie {
 
     private void addTask(Task task) {
         if (taskCount < MAX_TASKS) {
-            tasks[taskCount++] = task;
+            tasks.add(task);
             System.out.println("____________________________________________________________");
             System.out.println("I've added this task. Remember to say Thank you next time:");
             System.out.println("  " + task);
@@ -76,6 +80,24 @@ public class Stewie {
             System.out.println("____________________________________________________________");
         }
     }
+
+    private void deleteTask(String arg) {
+        try {
+            int index = Integer.parseInt(arg) - 1;
+            if (index >= 0 && index < tasks.size()) {
+                Task removed = tasks.remove(index);
+
+                System.out.println("____________________________________________________________");
+                System.out.println("Noted. I've removed this task:");
+                System.out.println(" " + removed);
+                System.out.println(" Now you have " + tasks.size() + " tasks in the list.");
+                System.out.println("____________________________________________________________");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid index. Do try again.");
+        }
+    }
+
 
     private void addDeadline(String arg) {
         String[] split = arg.split("/by", 2);
@@ -112,7 +134,7 @@ public class Stewie {
         } else {
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < taskCount; i++) {
-                System.out.println((i + 1) + "." + tasks[i]);
+                System.out.println((i + 1) + "." + tasks.get(i));
             }
         }
         System.out.println("____________________________________________________________");
@@ -123,10 +145,10 @@ public class Stewie {
         try {
             int index = Integer.parseInt(arg) - 1;
             if (index >= 0 && index < taskCount) {
-                tasks[index].markDone();
+                tasks.get(index).markDone();
                 System.out.println("____________________________________________________________");
                 System.out.println("Took you long enough to get this done:");
-                System.out.println("  " + tasks[index]);
+                System.out.println("  " + tasks.get(index));
                 System.out.println("____________________________________________________________");
             }
         } catch (NumberFormatException e) {
@@ -138,10 +160,10 @@ public class Stewie {
         try {
             int index = Integer.parseInt(arg) - 1;
             if (index >= 0 && index < taskCount) {
-                tasks[index].markUndone();
+                tasks.get(index).markUndone();
                 System.out.println("____________________________________________________________");
                 System.out.println("Go get this done:");
-                System.out.println("  " + tasks[index]);
+                System.out.println("  " + tasks.get(index));
                 System.out.println("____________________________________________________________");
             }
         } catch (NumberFormatException e) {
