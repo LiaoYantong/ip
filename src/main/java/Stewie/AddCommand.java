@@ -1,3 +1,5 @@
+package Stewie;
+
 public class AddCommand extends Command {
 
     private Task task;

@@ -1,3 +1,5 @@
+package Stewie;
+
 public class InvalidCommand extends Command {
 
     @Override

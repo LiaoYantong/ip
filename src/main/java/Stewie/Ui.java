@@ -1,9 +1,11 @@
+package Stewie;
+
 import java.util.Scanner;
 public class Ui {
 
     public void showGreeting() {
         System.out.println("____________________________________________________________");
-        System.out.println("Well well well. I am Stewie.");
+        System.out.println("Well well well. I am Stewie.Stewie.");
         System.out.println("Do enlighten me — what insignificant problem do you bring today?");
         System.out.println("____________________________________________________________");
     }
