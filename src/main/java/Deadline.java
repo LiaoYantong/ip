@@ -1,9 +1,19 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 public class Deadline extends Task{
-    private String by;
+    private LocalDate by;
+    private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String byStr) {
         super(description);
-        this.by = by;
+        try {
+            this.by = LocalDate.parse(byStr, INPUT_FORMAT);
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date format! Use yyyy-MM-dd. Storing as plain string.");
+            this.by = null;
+        }
     }
 
     @Override
@@ -13,12 +23,18 @@ public class Deadline extends Task{
 
     @Override
     public String toFileString() {
+        String dateStr = (by != null) ? by.format(INPUT_FORMAT) : "unknown";
         return "D | " + (isDone() ? "1" : "0") + " | " + getDescription() + " | " + by;
     }
 
 
     @Override
     public String toString() {
-        return "[" + getType() + "]" + super.toString() + " (by: " + by + ")";
+        String dateStr = (by != null) ? by.format(OUTPUT_FORMAT) : "unknown date";
+        return "[D]" + super.toString() + " (by: " + dateStr + ")";
+    }
+
+    public LocalDate getBy() {
+        return by;
     }
 }

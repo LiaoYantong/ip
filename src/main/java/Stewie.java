@@ -105,10 +105,7 @@ public class Stewie {
         }
     }
 
-
-
-
-
+    
     private void printGreeting() {
         System.out.println("____________________________________________________________");
         System.out.println("Well well well. I am Stewie.");
