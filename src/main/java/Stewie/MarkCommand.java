@@ -1,8 +1,10 @@
-public class UnmarkCommand extends Command {
+package Stewie;
+
+public class MarkCommand extends Command {
 
     private int index;
 
-    public UnmarkCommand(int index) {
+    public MarkCommand(int index) {
         this.index = index;
     }
 
@@ -10,8 +12,8 @@ public class UnmarkCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             Task t = tasks.get(index - 1);
-            t.markUndone();
-            ui.showMessage("OK! I've marked this task as not done yet:");
+            t.markDone();
+            ui.showMessage("Nice! I've marked this task as done:");
             ui.showMessage("  " + t);
             storage.save(tasks.getAll());
         } catch (IndexOutOfBoundsException e) {

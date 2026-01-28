@@ -1,7 +1,9 @@
+package Stewie;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-public class Event extends Task{
+public class Event extends Task {
     private LocalDate from;
     private LocalDate to;
     private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
