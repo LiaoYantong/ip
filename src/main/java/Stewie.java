@@ -1,8 +1,13 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.*;
+import java.util.List;
+
 
 public class Stewie {
 
+    private static final String DATA_DIR = "data";
+    private static final String DATA_FILE = "data/stewie.txt";
     private static final int MAX_TASKS = 100;
     private ArrayList<Task> tasks = new ArrayList<>();
     private int taskCount = 0;
@@ -12,6 +17,7 @@ public class Stewie {
     }
 
     public void run() {
+        loadTasks();
         printGreeting();
 
         Scanner scanner = new Scanner(System.in);
@@ -24,6 +30,83 @@ public class Stewie {
 
         printFarewell();
     }
+
+    private void loadTasks() {
+        File file = new File(DATA_FILE);
+
+        try {
+            File dir = new File(DATA_DIR);
+            if (!dir.exists()) {
+                dir.mkdir();
+            }
+
+            if (!file.exists()) {
+                file.createNewFile();
+                return;
+            }
+
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                Task task = parseTask(line);
+                if (task != null) {
+                    tasks.add(task);
+                }
+            }
+            reader.close();
+
+        } catch (IOException e) {
+            System.out.println("What the duece? Something went wrong loading your tasks hahaha.");
+        }
+    }
+
+    private Task parseTask(String line) {
+        try {
+            String[] parts = line.split("\\s*\\|\\s*");
+            String type = parts[0];
+            boolean isDone = parts[1].equals("1");
+
+            Task task;
+            switch (type) {
+                case "T":
+                    task = new Todo(parts[2]);
+                    break;
+                case "D":
+                    task = new Deadline(parts[2], parts[3]);
+                    break;
+                case "E":
+                    task = new Event(parts[2], parts[3], parts[4]);
+                    break;
+                default:
+                    return null;
+            }
+
+            if (isDone) {
+                task.markDone();
+            }
+            return task;
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private void saveTasks() {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(DATA_FILE));
+            for (Task task : tasks) {
+                writer.write(task.toFileString());
+                writer.newLine();
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Blast! Couldn't save your brilliant plans.");
+        }
+    }
+
+
+
 
 
     private void printGreeting() {
@@ -69,6 +152,7 @@ public class Stewie {
     private void addTask(Task task) {
         if (taskCount < MAX_TASKS) {
             tasks.add(task);
+            saveTasks();
             System.out.println("____________________________________________________________");
             System.out.println("I've added this task. Remember to say Thank you next time:");
             System.out.println("  " + task);
@@ -86,6 +170,7 @@ public class Stewie {
             int index = Integer.parseInt(arg) - 1;
             if (index >= 0 && index < tasks.size()) {
                 Task removed = tasks.remove(index);
+                saveTasks();
 
                 System.out.println("____________________________________________________________");
                 System.out.println("Noted. I've removed this task:");
@@ -146,6 +231,7 @@ public class Stewie {
             int index = Integer.parseInt(arg) - 1;
             if (index >= 0 && index < taskCount) {
                 tasks.get(index).markDone();
+                saveTasks();
                 System.out.println("____________________________________________________________");
                 System.out.println("Took you long enough to get this done:");
                 System.out.println("  " + tasks.get(index));
@@ -161,6 +247,7 @@ public class Stewie {
             int index = Integer.parseInt(arg) - 1;
             if (index >= 0 && index < taskCount) {
                 tasks.get(index).markUndone();
+                saveTasks();
                 System.out.println("____________________________________________________________");
                 System.out.println("Go get this done:");
                 System.out.println("  " + tasks.get(index));

@@ -27,7 +27,11 @@ public class Task {
         return " ";
     }
 
-        @Override
+    public String toFileString() {
+        return "";
+    }
+
+    @Override
         public String toString() {
             return "[" + (isDone ? "X" : " ") + "] " + description;
         }
