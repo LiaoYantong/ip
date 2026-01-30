@@ -1,5 +1,10 @@
 package Stewie;
 
+/**
+ * Represents a generic task with a description and completion status.
+ * This class is the superclass for specific task types.
+ */
+
 public class Task {
         private String description;
         private boolean isDone;
@@ -9,11 +14,18 @@ public class Task {
             this.isDone = false;
         }
 
+
+        /**
+       * Marks this task as completed.
+       */
         public void markDone() {
             isDone = true;
         }
-
+       /**
+       * Marks this task as not completed.
+       */
         public void markUndone() {
+
             isDone = false;
         }
 

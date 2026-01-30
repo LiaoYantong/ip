@@ -3,6 +3,13 @@ package Stewie;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Stewie is a task management chatbot that helps users track todos,
+ * deadlines, and events via a command-line interface.
+ *
+ * It supports interaction, command parsing, task storage.
+ */
+
 public class Stewie {
 
     private Storage storage;
@@ -19,6 +26,11 @@ public class Stewie {
             tasks = new TaskList();
         }
     }
+
+    /**
+     * Runs the main chatbot loop.
+     * Continues reading and executing user commands until an exit command is issued.
+     */
 
     public void run() {
         ui.showGreeting();
