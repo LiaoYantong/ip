@@ -1,5 +1,6 @@
 package Stewie;
 
+import java.util.List;
 import java.util.Scanner;
 public class Ui {
 
@@ -31,6 +32,21 @@ public class Ui {
     public void showError(String message) {
         System.out.println(message);
     }
+
+    /**
+     * Displays tasks that match a search keyword.
+     *
+     * @param matches List of matching tasks
+     */
+    public void showFindResults(List<Task> matches) {
+        System.out.println("Here are the matching tasks in your list:");
+        int index = 1;
+        for (Task task : matches) {
+            System.out.println(index + "." + task);
+            index++;
+        }
+    }
+
 
     public void showMessage(String message) {
         System.out.println(message);

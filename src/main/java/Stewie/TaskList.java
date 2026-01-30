@@ -1,6 +1,7 @@
 package Stewie;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TaskList {
 
@@ -29,6 +30,23 @@ public class TaskList {
     public int size() {
         return tasks.size();
     }
+
+    /**
+     * Finds tasks whose descriptions contain the given keyword.
+     *
+     * @param keyword Keyword to search for
+     * @return List of matching tasks
+     */
+    public List<Task> find(String keyword) {
+        List<Task> matches = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                matches.add(task);
+            }
+        }
+        return matches;
+    }
+
 
     public ArrayList<Task> getAll() {
         return tasks;

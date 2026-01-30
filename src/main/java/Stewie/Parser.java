@@ -29,6 +29,8 @@ public class Parser {
                 return new MarkCommand(Integer.parseInt(parts[1]));
             case "unmark":
                 return new UnmarkCommand(Integer.parseInt(parts[1]));
+            case "find":
+                return new FindCommand(parts[1].trim());
             case "bye":
                 return new ExitCommand();
             default:
