@@ -1,7 +1,15 @@
 package Stewie;
 
+/**
+ * Parses user input strings and converts them into executable commands.
+ */
+
 public class Parser {
 
+    /**
+     * Parses a full user command and returns the corresponding Command object.
+     * @return Command representing the user instruction
+     */
     public static Command parse(String input) {
         String[] parts = input.split(" ", 2);
         String command = parts[0];

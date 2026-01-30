@@ -3,6 +3,10 @@ package Stewie;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+/**
+ * Represents a task that must be completed before a specific date and time.
+ */
 public class Deadline extends Task {
     private LocalDate by;
     private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");

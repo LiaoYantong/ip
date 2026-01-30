@@ -1,7 +1,13 @@
 package Stewie;
 
+
 import java.io.*;
 import java.util.ArrayList;
+
+/**
+ * Handles loading tasks from disk and saving tasks to disk.
+ * Data is stored in a local file using a simple text-based format.
+ */
 
 public class Storage {
 
@@ -10,6 +16,12 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+
+    /**
+     * Loads tasks from the data file.
+     *
+     * @return A list of tasks loaded from disk
+     */
 
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> tasks = new ArrayList<>();
