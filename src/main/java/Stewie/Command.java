@@ -1,5 +1,7 @@
 package Stewie;
 
+import ui.Ui;
+
 /**
  * Represents an executable user command.
  * Subclasses define specific chatbot actions.

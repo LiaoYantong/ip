@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
 }
 
 repositories {
@@ -27,8 +28,14 @@ test {
     }
 }
 
+javafx {
+    version = "17"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+
 application {
-    mainClass.set("seedu.duke.Duke")
+    mainClass.set("Stewie.ui.Launcher")
 }
 
 shadowJar {

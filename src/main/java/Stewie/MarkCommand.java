@@ -1,5 +1,7 @@
 package Stewie;
 
+import ui.Ui;
+
 public class MarkCommand extends Command {
 
     private int index;

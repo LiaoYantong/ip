@@ -1,5 +1,7 @@
 package Stewie;
 
+import ui.Ui;
+
 public class UnmarkCommand extends Command {
 
     private int index;

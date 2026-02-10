@@ -1,4 +1,6 @@
-package Stewie;
+package ui;
+
+import Stewie.Task;
 
 import java.util.List;
 import java.util.Scanner;

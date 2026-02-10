@@ -1,5 +1,7 @@
 package Stewie;
 
+import ui.Ui;
+
 public class InvalidCommand extends Command {
 
     @Override
