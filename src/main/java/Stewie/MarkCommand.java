@@ -1,12 +1,14 @@
 package Stewie;
 
-import ui.Ui;
+import Stewie.ui.Ui;
 
 public class MarkCommand extends Command {
 
     private int index;
 
     public MarkCommand(int index) {
+        assert index >= 0 
+                : "Index should be validated before calling mark()";
         this.index = index;
     }
 

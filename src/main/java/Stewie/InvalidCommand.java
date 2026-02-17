@@ -1,6 +1,6 @@
 package Stewie;
 
-import ui.Ui;
+import Stewie.ui.Ui;
 
 public class InvalidCommand extends Command {
 

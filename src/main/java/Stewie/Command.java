@@ -1,6 +1,6 @@
 package Stewie;
 
-import ui.Ui;
+import Stewie.ui.Ui;
 
 /**
  * Represents an executable user command.
