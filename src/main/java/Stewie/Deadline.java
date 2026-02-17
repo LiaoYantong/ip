@@ -13,6 +13,7 @@ public class Deadline extends Task {
     private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     public Deadline(String description, String byStr) {
+
         super(description);
         try {
             this.by = LocalDate.parse(byStr, INPUT_FORMAT);
