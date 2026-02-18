@@ -3,49 +3,78 @@ package Stewie;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Event extends Task {
-    private LocalDate from;
-    private LocalDate to;
+    private List<String> slots;
+    private String confirmedSlot;
+
     private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
-    public Event(String description, String fromStr, String toStr) {
+    public Event(String description, List<String> slots) {
         super(description);
-        try {
-            this.from = LocalDate.parse(fromStr, INPUT_FORMAT);
-            this.to = LocalDate.parse(toStr, INPUT_FORMAT);
-        } catch (DateTimeParseException e) {
-            System.out.println("Invalid date format! Use yyyy-MM-dd. Storing as plain string.");
-            this.from = null;
-            this.to = null;
-        }
-    }
 
+        assert slots != null : "Slots list should not be null";
+        assert !slots.isEmpty() : "Event must have at least one slot";
+
+        this.slots = new ArrayList<>(slots);  // defensive copy
+        this.confirmedSlot = null;
+    }
     @Override
     public String getType() {
         return "E";
     }
 
+    /**
+     * Confirm one of the tentative slots.
+     */
+    public void confirmSlot(int index) {
+        assert index >= 0 && index < slots.size()
+                : "Slot index must be within valid range";
+
+        confirmedSlot = slots.get(index);
+    }
+
+    /**
+     * Returns true if a slot has been confirmed.
+     */
+    public boolean isConfirmed() {
+        return confirmedSlot != null;
+    }
+
+    public List<String> getSlots() {
+        return new ArrayList<>(slots);
+    }
+
+    public String getConfirmedSlot() {
+        return confirmedSlot;
+    }
+
     @Override
     public String toFileString() {
-        String fromStr = (from != null) ? from.format(INPUT_FORMAT) : "unknown";
-        String toStr = (to != null) ? to.format(INPUT_FORMAT) : "unknown";
-        return "E | " + (isDone() ? "1" : "0") + " | " + getDescription() + " | " + from + " | " + to;
+        if (isConfirmed()) {
+            return "E | " + (isDone() ? "1" : "0")
+                    + " | " + getDescription()
+                    + " | CONFIRMED | " + confirmedSlot;
+        } else {
+            return "E | " + (isDone() ? "1" : "0")
+                    + " | " + getDescription()
+                    + " | TENTATIVE | " + String.join(",", slots);
+        }
     }
 
-    public LocalDate getFrom() {
-        return from;
-    }
-
-    public LocalDate getTo() {
-        return to;
-    }
 
 
     @Override
     public String toString() {
-        String fromStr = (from != null) ? from.format(OUTPUT_FORMAT) : "unknown";
-        String toStr = (to != null) ? to.format(OUTPUT_FORMAT) : "unknown";
-        return "[E]" + super.toString() + " (from: " + fromStr + " to: " + toStr + ")";
+        if (isConfirmed()) {
+            return "[E]" + super.toString()
+                    + " (at: " + confirmedSlot + ")";
+        } else {
+            return "[E]" + super.toString()
+                    + " (tentative: " + slots + ")";
+        }
     }
 }
