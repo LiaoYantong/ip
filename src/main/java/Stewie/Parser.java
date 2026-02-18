@@ -1,5 +1,8 @@
 package Stewie;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Parses user input strings and converts them into executable commands.
  */
@@ -22,7 +25,9 @@ public class Parser {
             case "deadline":
                 return new AddCommand(new Deadline(parts[1], extractBy(parts[1])));
             case "event":
-                return new AddCommand(new Event(parts[1], extractFrom(parts[1]), extractTo(parts[1])));
+                String description = parts[1].split("/slot")[0].trim();
+                List<String> slots = extractSlots(parts[1]);
+                return new AddCommand(new Event(description, slots));
             case "delete":
                 return new DeleteCommand(Integer.parseInt(parts[1]));
             case "mark":
@@ -62,7 +67,20 @@ public class Parser {
 
             case "E":
                 if (parts.length < 5) return null;
-                task = new Event(description, parts[3].trim(), parts[4].trim());
+                if (parts[3].equals("CONFIRMED")) {
+                    List<String> temp = new ArrayList<>();
+                    temp.add(parts[4].trim());
+                    Event event = new Event(description, temp);
+                    event.confirmSlot(0);
+                    task = event;
+                } else {
+                    String[] slotArray = parts[4].split(";");
+                    List<String> slotList = new ArrayList<>();
+                    for (String s : slotArray) {
+                        slotList.add(s.trim());
+                    }
+                    task = new Event(description, slotList);
+                }
                 break;
 
             default:
@@ -103,6 +121,22 @@ public class Parser {
         }
         return parts[1].trim();
     }
+
+    public static List<String> extractSlots(String input) {
+        List<String> slots = new ArrayList<>();
+
+        String[] parts = input.split("/slot");
+
+        for (int i = 1; i < parts.length; i++) {
+            String slot = parts[i].trim();
+            if (!slot.isBlank()) {
+                slots.add(slot);
+            }
+        }
+
+        return slots;
+    }
+
 
 
 
