@@ -35,11 +35,11 @@ javafx {
 
 
 application {
-    mainClass.set("Stewie.ui.Launcher")
+    mainClass.set("stewie.ui.Launcher")
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "stewie"
     archiveClassifier = null
 }
 
