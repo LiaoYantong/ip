@@ -44,6 +44,9 @@ public class Parser {
             }
         } catch (Exception e) {
             // Catch unexpected exceptions to prevent GUI crash
+            // AI-assisted: Used ChatGPT to improve input validation in Parser.parse()
+            // It suggested checks for missing descriptions and returning a friendly InvalidCommand
+            // instead of crashing when user types "todo" with no description.
             return new InvalidCommand("What the duece: " + e.getMessage());
         }
 
