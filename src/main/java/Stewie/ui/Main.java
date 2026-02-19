@@ -2,16 +2,15 @@ package Stewie.ui;
 
 import Stewie.Stewie;
 import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 
@@ -45,6 +44,12 @@ public class Main extends Application {
         Button sendButton = new Button("Send");
 
         HBox inputBox = new HBox(10, userInput, sendButton);
+        inputBox.setPadding(new Insets(10)); // optional padding
+        inputBox.setAlignment(Pos.CENTER);
+
+
+        HBox.setHgrow(userInput, Priority.ALWAYS);
+        userInput.setMaxWidth(Double.MAX_VALUE);
 
         BorderPane root = new BorderPane();
         root.setCenter(scrollPane);
