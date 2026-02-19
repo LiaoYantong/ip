@@ -18,6 +18,10 @@ public class Stewie {
     private TaskList tasks;
     private Ui ui;
 
+    public String getGreeting() {
+        return "Well well well. I am Stewie.\nDo enlighten me, what insignificant problem do you bring today?";
+    }
+
     public Stewie(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

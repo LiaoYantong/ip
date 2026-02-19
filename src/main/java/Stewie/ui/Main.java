@@ -41,6 +41,9 @@ public class Main extends Application {
         root.setBottom(inputBox);
         Scene scene = new Scene(root, 400, 500);
 
+        dialogContainer.getChildren().add(new DialogBox(stewie.getGreeting(), stewieImage, false));
+
+
         // When button clicked
         sendButton.setOnAction(event -> {
             String input = userInput.getText();
