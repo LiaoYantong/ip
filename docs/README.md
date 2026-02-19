@@ -1,10 +1,5 @@
 # Stewie Chatbot - User Guide
 
-// Update the title above to match the actual product name
-
-// Product screenshot goes here
-
-// Product intro goes here
 
 
 Welcome to **Stewie**, your sarcastic but helpful task management assistant!  

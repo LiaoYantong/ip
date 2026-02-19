@@ -1,9 +1,6 @@
 package Stewie.ui;
 
 import Stewie.Stewie;
-
-
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,13 +14,26 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.InputStream;
 
+/**
+ * JavaFX GUI for the Stewie chatbot.
+ * <p>
+ * Displays a chat interface where the user can interact with Stewie.
+ * Messages are shown as dialog boxes with avatars for the user and Stewie.
+ */
 public class Main extends Application {
     private Stewie stewie = new Stewie("data/stewie.txt");
     private Image userImage = new Image(this.getClass().getResourceAsStream("/peter.png"));
     private Image stewieImage = new Image(this.getClass().getResourceAsStream("/stewie.png"));
 
+    /**
+     * Starts the JavaFX application.
+     * <p>
+     * Sets up the GUI with a scrollable dialog container, input field, send button,
+     * and displays messages from both the user and Stewie.
+     *
+     * @param stage Primary stage provided by JavaFX
+     */
     @Override
     public void start(Stage stage) {
         VBox dialogContainer = new VBox(10);

@@ -12,6 +12,12 @@ public class Deadline extends Task {
     private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
+    /**
+     * Constructs a Deadline task.
+     *
+     * @param description Description of the task
+     * @param byStr       Deadline date as a string in yyyy-MM-dd format
+     */
     public Deadline(String description, String byStr) {
 
         super(description);
@@ -23,15 +29,26 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns the type identifier of this task.
+     *
+     * @return "D" for Deadline
+     */
     @Override
     public String getType() {
+
         return "D";
     }
 
+    /**
+     * Returns a string representation of this task for saving to a file.
+     *
+     * @return Formatted string for file storage
+     */
     @Override
     public String toFileString() {
         String dateStr = (by != null) ? by.format(INPUT_FORMAT) : "unknown";
-        return "D | " + (isDone() ? "1" : "0") + " | " + getDescription() + " | " + by;
+        return "D | " + (isDone() ? "1" : "0") + " | " + getDescription() + " | " + dateStr;
     }
 
 
@@ -41,7 +58,13 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + dateStr + ")";
     }
 
+    /**
+     * Returns the deadline date as a LocalDate object.
+     *
+     * @return Deadline date, or null if invalid
+     */
     public LocalDate getBy() {
+
         return by;
     }
 }

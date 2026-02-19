@@ -6,7 +6,22 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * Represents a single chat message in the GUI, displayed as a horizontal box
+ * containing a text label and an avatar image.
+ * <p>
+ * The dialog box aligns messages differently depending on whether it is from
+ * the user or from Stewie. User messages are aligned to the right, while
+ * Stewie's messages are aligned to the left.
+ */
 public class DialogBox extends HBox {
+    /**
+     * Creates a DialogBox containing a text message and an avatar image.
+     *
+     * @param text   The message text to display.
+     * @param img    The avatar image to display alongside the text.
+     * @param isUser True if the message is from the user, false if from Stewie.
+     */
     public DialogBox(String text, Image img, boolean isUser) {
         Label label = new Label(text);
         label.setWrapText(true);

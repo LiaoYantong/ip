@@ -41,6 +41,14 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves a list of tasks to the data file.
+     * <p>
+     * Each task is serialized using its {@link Task#toFileString()} method.
+     *
+     * @param tasks List of tasks to save
+     * @throws IOException If there is an error writing to the file
+     */
     public void save(ArrayList<Task> tasks) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
         for (Task task : tasks) {

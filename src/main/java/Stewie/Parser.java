@@ -52,6 +52,12 @@ public class Parser {
 
     }
 
+    /**
+     * Parses a line from the storage file into a {@link Task} object.
+     *
+     * @param line The line from the file
+     * @return A Task object or null if parsing fails
+     */
     public static Task parseTaskFromFile(String line) {
         if (line == null || line.isBlank()) return null;
 
@@ -104,6 +110,12 @@ public class Parser {
     }
 
 
+    /**
+     * Extracts the "/by" part of a deadline input.
+     *
+     * @param input User input
+     * @return The string after "/by" or null if missing
+     */
     public static String extractBy(String input) {
         String[] parts = input.split("/by", 2);
         if (parts.length < 2 || parts[1].isBlank()) {
@@ -113,6 +125,12 @@ public class Parser {
     }
 
 
+    /**
+     * Extracts the "/from" part of an event input.
+     *
+     * @param input User input
+     * @return The string after "/from" or null if missing
+     */
     public static String extractFrom(String input) {
         String[] parts = input.split("/from", 2);
         if (parts.length < 2 || parts[1].isBlank()) {
@@ -123,6 +141,12 @@ public class Parser {
     }
 
 
+    /**
+     * Extracts the "/to" part of an event input.
+     *
+     * @param input User input
+     * @return The string after "/to" or null if missing
+     */
     public static String extractTo(String input) {
         String[] parts = input.split("/to", 2);
         if (parts.length < 2 || parts[1].isBlank()) {
@@ -131,6 +155,12 @@ public class Parser {
         return parts[1].trim();
     }
 
+    /**
+     * Extracts multiple "/slot" entries from an event input.
+     *
+     * @param input User input
+     * @return A list of slot strings
+     */
     public static List<String> extractSlots(String input) {
         List<String> slots = new ArrayList<>();
 

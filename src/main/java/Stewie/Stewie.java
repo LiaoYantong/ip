@@ -22,6 +22,11 @@ public class Stewie {
         return "Well well well. I am Stewie.\nDo enlighten me, what insignificant problem do you bring today?";
     }
 
+    /**
+     * Creates a Stewie chatbot with a given storage file path.
+     *
+     * @param filePath Path to the file where tasks are saved/loaded
+     */
     public Stewie(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -56,6 +61,17 @@ public class Stewie {
         ui.showFarewell();
     }
 
+
+    /**
+     * Processes a single user input and returns Stewie's response.
+     * <p>
+     * This method is used by the GUI to simulate a conversation:
+     * it parses the input into a Command, executes it on the current task list,
+     * and captures the output message from the UI.
+     *
+     * @param input the raw string input from the user
+     * @return the chatbot's response as a string
+     */
     public String getResponse(String input) {
         Ui ui = new Ui();   // create fresh UI buffer
         Command command = Parser.parse(input);
