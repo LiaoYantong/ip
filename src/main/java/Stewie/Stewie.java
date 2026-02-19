@@ -52,6 +52,22 @@ public class Stewie {
         ui.showFarewell();
     }
 
+    public String getResponse(String input) {
+        Ui ui = new Ui();   // create fresh UI buffer
+        Command command = Parser.parse(input);
+
+        command.execute(tasks, ui, storage);
+
+        String response = ui.getLastMessage();
+        ui.clear();
+
+        return response;
+    }
+
+
+
+
+
     public static void main(String[] args) {
         new Stewie("data/stewie.txt").run();
     }

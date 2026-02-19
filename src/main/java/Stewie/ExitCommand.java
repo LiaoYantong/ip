@@ -6,11 +6,12 @@ public class ExitCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showMessage("Goodbye! Stewie.Stewie will be back to conquer your world.");
+        ui.showMessage("Goodbye! Very well. Run along now. I have schemes to attend to.");
     }
 
     @Override
     public boolean isExit() {
+
         return true;
     }
 }

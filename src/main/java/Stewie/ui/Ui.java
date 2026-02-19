@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 public class Ui {
 
+    private StringBuilder output = new StringBuilder();
     public void showGreeting() {
         System.out.println("____________________________________________________________");
         System.out.println("Well well well. I am Stewie.");
@@ -20,19 +21,23 @@ public class Ui {
     }
 
     public void showDivider() {
+
         System.out.println("____________________________________________________________");
     }
 
     public String readCommand(Scanner scanner) {
+
         return scanner.nextLine();
     }
 
     public void showLoadingError() {
+
         System.out.println("Something went wrong loading your tasks.");
     }
 
     public void showError(String message) {
-        System.out.println(message);
+
+        output.append(message).append("\n");
     }
 
     /**
@@ -41,17 +46,26 @@ public class Ui {
      * @param matches List of matching tasks
      */
     public void showFindResults(List<Task> matches) {
-        System.out.println("Here are the matching tasks in your list:");
+        output.append("Here are the matching tasks in your list:\n");
         int index = 1;
         for (Task task : matches) {
-            System.out.println(index + "." + task);
+            output.append(index).append(". ").append(task).append("\n");
             index++;
         }
     }
 
+    public String getLastMessage() {
+        return output.toString();
+    }
+
+    public void clear() {
+        output.setLength(0);
+    }
+
 
     public void showMessage(String message) {
-        System.out.println(message);
+
+        output.append(message).append("\n");
     }
 }
 

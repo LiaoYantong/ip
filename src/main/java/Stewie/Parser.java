@@ -17,30 +17,36 @@ public class Parser {
         String[] parts = input.split(" ", 2);
         String command = parts[0];
 
-        switch (command) {
-            case "list":
-                return new ListCommand();
-            case "todo":
-                return new AddCommand(new Todo(parts[1]));
-            case "deadline":
-                return new AddCommand(new Deadline(parts[1], extractBy(parts[1])));
-            case "event":
-                String description = parts[1].split("/slot")[0].trim();
-                List<String> slots = extractSlots(parts[1]);
-                return new AddCommand(new Event(description, slots));
-            case "delete":
-                return new DeleteCommand(Integer.parseInt(parts[1]));
-            case "mark":
-                return new MarkCommand(Integer.parseInt(parts[1]));
-            case "unmark":
-                return new UnmarkCommand(Integer.parseInt(parts[1]));
-            case "find":
-                return new FindCommand(parts[1].trim());
-            case "bye":
-                return new ExitCommand();
-            default:
-                return new InvalidCommand();
+        try{
+            switch (command) {
+                case "list":
+                    return new ListCommand();
+                case "todo":
+                    return new AddCommand(new Todo(parts[1]));
+                case "deadline":
+                    return new AddCommand(new Deadline(parts[1], extractBy(parts[1])));
+                case "event":
+                    String description = parts[1].split("/slot")[0].trim();
+                    List<String> slots = extractSlots(parts[1]);
+                    return new AddCommand(new Event(description, slots));
+                case "delete":
+                    return new DeleteCommand(Integer.parseInt(parts[1]));
+                case "mark":
+                    return new MarkCommand(Integer.parseInt(parts[1]));
+                case "unmark":
+                    return new UnmarkCommand(Integer.parseInt(parts[1]));
+                case "find":
+                    return new FindCommand(parts[1].trim());
+                case "bye":
+                    return new ExitCommand();
+                default:
+                    return new InvalidCommand();
+            }
+        } catch (Exception e) {
+            // Catch unexpected exceptions to prevent GUI crash
+            return new InvalidCommand("What the duece: " + e.getMessage());
         }
+
     }
 
     public static Task parseTaskFromFile(String line) {
