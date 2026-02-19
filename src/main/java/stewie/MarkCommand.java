@@ -1,6 +1,6 @@
-package Stewie;
+package stewie;
 
-import Stewie.ui.Ui;
+import stewie.ui.Ui;
 
 /**
  * Represents a command to mark a task as done in the TaskList.

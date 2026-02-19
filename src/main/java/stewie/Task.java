@@ -1,4 +1,4 @@
-package Stewie;
+package stewie;
 
 /**
  * Represents a generic task with a description and completion status.

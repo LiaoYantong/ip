@@ -1,4 +1,4 @@
-package Stewie.ui;
+package stewie.ui;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;

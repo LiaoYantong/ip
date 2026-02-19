@@ -1,6 +1,6 @@
-package Stewie;
+package stewie;
 
-import Stewie.ui.Ui;
+import stewie.ui.Ui;
 
 /**
  * Represents a command to delete a task from the task list.

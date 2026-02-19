@@ -1,6 +1,6 @@
-package Stewie;
+package stewie;
 
-import Stewie.ui.Ui;
+import stewie.ui.Ui;
 
 import java.io.IOException;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package Stewie;
+package stewie;
 
 
 import java.io.*;

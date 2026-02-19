@@ -1,6 +1,6 @@
-package Stewie;
+package stewie;
 
-import Stewie.ui.Ui;
+import stewie.ui.Ui;
 
 /**
  * Represents a command that is invalid or unrecognized by the chatbot.

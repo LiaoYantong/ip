@@ -1,4 +1,4 @@
-package Stewie;
+package stewie;
 
 /**
  * Represents a Todo task.
