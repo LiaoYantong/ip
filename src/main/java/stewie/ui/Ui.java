@@ -15,7 +15,9 @@ import java.util.Scanner;
 public class Ui {
 
     private StringBuilder output = new StringBuilder();
-    
+    /**
+     * Displays the greeting message when the chatbot starts.
+     */
     public void showGreeting() {
         System.out.println("____________________________________________________________");
         System.out.println("Well well well. I am Stewie.");
