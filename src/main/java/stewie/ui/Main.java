@@ -63,7 +63,7 @@ public class Main extends Application {
         // Show greeting
         dialogContainer.getChildren().add(createDialogBox(stewie.getGreeting(), stewieImage, false));
 
-        
+
         setupInputActions(inputBox, dialogContainer, scrollPane, stage);
     }
 
